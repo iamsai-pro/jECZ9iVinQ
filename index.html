@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Classic Mac OS Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="desktop">
+
+    <div class="window" id="welcome-window" style="top: 50px; left: 50px; z-index: 1;">
+      <div class="title-bar">
+        <div class="title-bar-text">Welcome</div>
+        <div class="window-buttons">
+          <span class="close-button">●</span>
+        </div>
+      </div>
+      <div class="window-content">
+        <p>Hello! I'm Pabolu Venkata Subrahmanya Dheeraj.</p>
+        <p>Welcome to my Classic Mac OS-style portfolio.</p>
+        <p>Explore my skills, projects, and education.</p>
+      </div>
+    </div>
+
+    <div class="window" id="skills-window" style="top: 150px; left: 150px; z-index: 2;">
+      <div class="title-bar">
+        <div class="title-bar-text">Technical Strengths</div>
+        <div class="window-buttons">
+          <span class="close-button">●</span>
+        </div>
+      </div>
+      <div class="window-content">
+        <strong>Programming Languages:</strong> Python 3, Java<br>
+        <strong>Frameworks:</strong> Flask, Spring Boot, React js<br>
+        <strong>Web Technologies:</strong> HTML, CSS, Tailwindcss<br>
+        <strong>Database:</strong> Structured Query Language (SQL)<br>
+        <strong>Web Tools:</strong> Github, Git
+      </div>
+    </div>
+
+    <div class="window" id="projects-window" style="top: 250px; left: 250px; z-index: 3;">
+      <div class="title-bar">
+        <div class="title-bar-text">Projects</div>
+        <div class="window-buttons">
+          <span class="close-button">●</span>
+        </div>
+      </div>
+      <div class="window-content">
+        <h3>Full-Stack Firebase User Portfolio System</h3>
+        <p>Developed user authentication, profile management, and file upload features using Firebase Authentication, Realtime Database & Storage.</p>
+        <p>Built a clean and responsive UI using HTML and CSS to ensure user-friendly interface.</p>
+        <p>Created an admin dashboard in Flask to manage user lifecycle (CRUD operations), leading to clean and structured data handling.</p>
+        <h3>Representation and Symbols of Nucleotide Sequence Data</h3>
+        <p>Developed a tool that converts any input text into a DNA-base sequence (A, C, G, T) and displays the output in four distinct colours.</p>
+        <h3>Resume to Portfolio Generator</h3>
+        <p>Built a full-stack application using React (Vite) and Flask that converts resume PDFs into AI-generated, responsive portfolio websites.</p>
+        <p>Automated deployment by integrating GitHub APIs to create repositories, upload HTML/CSS files, and deliver a live GitHub Pages link within seconds.</p>
+      </div>
+    </div>
+
+    <div class="window" id="education-window" style="top: 350px; left: 350px; z-index: 4;">
+      <div class="title-bar">
+        <div class="title-bar-text">Education</div>
+        <div class="window-buttons">
+          <span class="close-button">●</span>
+        </div>
+      </div>
+      <div class="window-content">
+        <strong>Bachelor of Engineering, Computer Science and Engineering</strong><br>
+        R . M . D E n g i n e e r i n g C o l l e g e , C h e n n a i<br>
+        2 0 2 2 - 2 0 2 6<br>
+        C G P A : 7 . 7 0 *<br>
+        <br>
+        <strong>Higher Secondary School</strong><br>
+        N a r a y a n a J r . c o l l e g e , N e l l o r e<br>
+        2 0 2 0 - 2 0 2 2<br>
+        P e r c e n t a g e : 9 2 . 6<br>
+        <br>
+        <strong>Secondary Education</strong><br>
+        V i v e k a n a n d a H . S<br>
+        2 0 2 0<br>
+        P e r c e n t a g e : 7 6 . 1 7
+      </div>
+    </div>
+
+    <div class="window" id="certifications-window" style="top: 450px; left: 450px; z-index: 5;">
+      <div class="title-bar">
+        <div class="title-bar-text">Certifications</div>
+        <div class="window-buttons">
+          <span class="close-button">●</span>
+        </div>
+      </div>
+      <div class="window-content">
+        DATA BASE MANAGEMENT SYSTEM - NPTEL<br>
+        Responsive Web Design - free code camp
+      </div>
+    </div>
+
+    <div class="window" id="contact-window" style="top: 550px; left: 550px; z-index: 6;">
+      <div class="title-bar">
+        <div class="title-bar-text">Contact</div>
+        <div class="window-buttons">
+          <span class="close-button">●</span>
+        </div>
+      </div>
+      <div class="window-content">
+        B-11-582, Chennuru road, Buchi reddy palem<br>
+        (+91)7032671918<br>
+        subrahmanyadheeraj1918@gmail.com<br>
+        <a href="https://dheeraj1918.github.io/portfolio/" target="_blank">Portfolio Link</a><br>
+        Github: <a href="https://github.com/dheeraj1918" target="_blank">dheeraj1918</a>
+      </div>
+    </div>
+
+    <footer class="desktop-footer">
+      <p>PABOLU VENKATA SUBRAHMANYA DHEERAJ | © 2023</p>
+    </footer>
+
+  </div>
+
+  <script>
+    const windows = document.querySelectorAll('.window');
+    let currentZIndex = 7; // Start z-index after initial windows
+
+    // Draggable functionality
+    let activeWindow = null;
+    let initialMouseX, initialMouseY, initialWindowX, initialWindowY;
+
+    document.addEventListener('mousedown', (e) => {
+      const target = e.target;
+      if (target.classList.contains('title-bar-text') || target.classList.contains('title-bar')) {
+        activeWindow = target.closest('.window');
+        if (activeWindow) {
+          bringToFront(activeWindow);
+          initialMouseX = e.clientX;
+          initialMouseY = e.clientY;
+          initialWindowX = activeWindow.offsetLeft;
+          initialWindowY = activeWindow.offsetTop;
+          document.addEventListener('mousemove', onMouseMove);
+          document.addEventListener('mouseup', onMouseUp);
+        }
+      } else if (target.classList.contains('close-button')) {
+        const windowToClose = target.closest('.window');
+        windowToClose.style.display = 'none';
+      } else {
+        // Clicked on desktop or content, bring to front if it's a window
+        const clickedWindow = target.closest('.window');
+        if (clickedWindow) {
+          bringToFront(clickedWindow);
+        }
+      }
+    });
+
+    function onMouseMove(e) {
+      if (!activeWindow) return;
+      const deltaX = e.clientX - initialMouseX;
+      const deltaY = e.clientY - initialMouseY;
+      activeWindow.style.left = `${initialWindowX + deltaX}px`;
+      activeWindow.style.top = `${initialWindowY + deltaY}px`;
+    }
+
+    function onMouseUp() {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+      activeWindow = null;
+    }
+
+    function bringToFront(windowElement) {
+      windows.forEach(win => win.style.zIndex = '0'); // Reset all z-indices
+      windowElement.style.zIndex = currentZIndex++;
+    }
+
+    // Initial z-index setting
+    windows.forEach(win => {
+      win.style.zIndex = currentZIndex++;
+    });
+
+    // Make windows draggable on touch devices
+    document.addEventListener('touchstart', (e) => {
+      const target = e.target;
+      if (target.classList.contains('title-bar-text') || target.classList.contains('title-bar')) {
+        activeWindow = target.closest('.window');
+        if (activeWindow) {
+          bringToFront(activeWindow);
+          initialMouseX = e.touches[0].clientX;
+          initialMouseY = e.touches[0].clientY;
+          initialWindowX = activeWindow.offsetLeft;
+          initialWindowY = activeWindow.offsetTop;
+          document.addEventListener('touchmove', onTouchMove, { passive: false });
+          document.addEventListener('touchend', onTouchEnd);
+        }
+      } else if (target.classList.contains('close-button')) {
+        const windowToClose = target.closest('.window');
+        windowToClose.style.display = 'none';
+      } else {
+        const clickedWindow = target.closest('.window');
+        if (clickedWindow) {
+          bringToFront(clickedWindow);
+        }
+      }
+    });
+
+    function onTouchMove(e) {
+      if (!activeWindow) return;
+      e.preventDefault(); // Prevent scrolling while dragging
+      const deltaX = e.touches[0].clientX - initialMouseX;
+      const deltaY = e.touches[0].clientY - initialMouseY;
+      activeWindow.style.left = `${initialWindowX + deltaX}px`;
+      activeWindow.style.top = `${initialWindowY + deltaY}px`;
+    }
+
+    function onTouchEnd() {
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchend', onTouchEnd);
+      activeWindow = null;
+    }
+
+    // Responsive adjustments for mobile
+    function adjustWindowPositions() {
+      if (window.innerWidth < 768) {
+        windows.forEach((win, index) => {
+          win.style.left = '10px';
+          win.style.top = `${(index * 70) + 20}px`; // Stack vertically
+        });
+      } else {
+        // Revert to original positions or re-calculate if needed
+        // For simplicity here, we'll assume initial positions are fine if not mobile
+        // In a real app, you'd store original positions
+      }
+    }
+
+    window.addEventListener('resize', adjustWindowPositions);
+    adjustWindowPositions(); // Initial call
+  </script>
+
+</body>
+</html>
